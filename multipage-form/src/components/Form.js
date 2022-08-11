@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import OtherInfo from './OtherInfo';
 import PersonalInfo from './PersonalInfo';
 import SignUpInfo from './SignUpInfo';
+import Confirm from './Confirm';
 
 const Form = () => {
   const [page, setPage] = useState(0);
 
-  const formTitles = ["Sign Up", "Personal Info", "Other"];
+  const formTitles = ["Sign Up", "Personal Info", "Other", "Confirmation"];
 
   const pageDisplay = () => {
     if (page === 0) {
@@ -15,8 +16,10 @@ const Form = () => {
     else if (page === 1) {
       return <PersonalInfo />
     }
-    else {
+    else if (page === 2) {
       return <OtherInfo />
+    } else {
+      return <Confirm />
     }
   }
 
@@ -30,18 +33,23 @@ const Form = () => {
         <div className='body'>{pageDisplay()}</div>
         <div className='footer'>
           <button
-            disabled={page == 0}
+            disabled={page === 0}
             onClick={() => { setPage((currPage) => currPage - 1) }}
           >Prev</button>
-          <button
-            disabled={page === formTitles.length - 1}
-            onClick={() => { setPage((currPage) => currPage + 1) }
-            }>
-            Next
-          </button>
+          {page !== formTitles.length - 1 &&
+            <button
+              disabled={page === formTitles.length - 1}
+              onClick={() => { setPage((currPage) => currPage + 1) }
+              }>
+              Next
+            </button>}
+          {page === formTitles.length - 1 &&
+            <button>
+              Confirm
+            </button>}
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
