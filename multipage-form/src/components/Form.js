@@ -6,20 +6,31 @@ import Confirm from './Confirm';
 
 const Form = () => {
   const [page, setPage] = useState(0);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    username: "",
+    nationality: "",
+    other: ""
+  });
+
 
   const formTitles = ["Sign Up", "Personal Info", "Other", "Confirmation"];
 
   const pageDisplay = () => {
     if (page === 0) {
-      return <SignUpInfo />
+      return <SignUpInfo formData={formData} setFormData={setFormData} />
     }
     else if (page === 1) {
-      return <PersonalInfo />
+      return <PersonalInfo formData={formData} setFormData={setFormData} />
     }
     else if (page === 2) {
-      return <OtherInfo />
+      return <OtherInfo formData={formData} setFormData={setFormData} />
     } else {
-      return <Confirm />
+      return <Confirm formData={formData} />
     }
   }
 
